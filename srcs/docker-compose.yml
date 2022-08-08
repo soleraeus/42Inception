@@ -1,0 +1,14 @@
+version: "3.6"
+
+services:
+        mariadb:
+                build: requirements/mariadb
+                image: mariadb
+                restart: always
+                networks:
+                        - db-network
+                volumes:
+                        - /home/bdetune/data:/var/lib/mysql
+
+networks:
+        db-network: {}
