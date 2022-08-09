@@ -9,15 +9,15 @@ services:
                         - db-network
                 volumes:
                         - mariadb-volume:/var/lib/mysql
-                          #        wordpress:
-                          #                container_name: wordpress
-                          #  build: requirements/wordpress
-                          #  depends_on: [mariadb]
-                          # restart: always
-                          # networks:
-                          #     - db-network
-                          #    volumes:
-                          #                 - wordpress-volume:/var/html/www
+        wordpress:
+               container_name: wordpress
+               build: requirements/wordpress
+               depends_on: [mariadb]
+               restart: always
+               networks:
+                       - db-network
+               volumes:
+                       - wordpress-volume:/var/html/www
 
 networks:
         db-network: {}
@@ -28,4 +28,9 @@ volumes:
                         type: none
                         device: /home/bdetune/data/mariadb
                         o: bind
-                #     wordpress-volume:
+        wordpress-volume:
+                driver_opts:
+                        type: none
+                        device: /home/bdetune/data/wordpress
+                        o: bind
+
