@@ -4,8 +4,9 @@ RUN apt-get update && \
 	test -d /var/run/mysqld || mkdir /var/run/mysqld; \
      	chmod 0777 /var/run/mysqld; \
 	test -d /var/lib/mysql || mkdir /var/lib/mysql; \
-     	chmod 0777 /var/lib/mysql;
-ADD conf/mariadb_init.sh /conf.sh
+     	chmod 0777 /var/lib/mysql; \
+	/etc/init.d/mysql start; \
+	mysql -uroot --password="" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'password'; FLUSH PRIVILEGES;"
 EXPOSE 3306
-ENTRYPOINT ["./conf.sh"]
-CMD ["mysqld_safe"]
+COPY conf.sh conf.sh
+ENTRYPOINT ./conf.sh

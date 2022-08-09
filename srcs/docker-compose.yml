@@ -1,14 +1,31 @@
 version: "3.6"
 
 services:
-        mymariadb:
-                container_name: mymariadb
+        mariadb:
+                container_name: mariadb
                 build: requirements/mariadb
                 restart: always
                 networks:
                         - db-network
-#                volumes:
-#                        - /home/bdetune/data:/var/run/mysqld
+                volumes:
+                        - mariadb-volume:/var/lib/mysql
+                          #        wordpress:
+                          #                container_name: wordpress
+                          #  build: requirements/wordpress
+                          #  depends_on: [mariadb]
+                          # restart: always
+                          # networks:
+                          #     - db-network
+                          #    volumes:
+                          #                 - wordpress-volume:/var/html/www
 
 networks:
         db-network: {}
+
+volumes:
+        mariadb-volume:
+                driver_opts:
+                        type: none
+                        device: /home/bdetune/data/mariadb
+                        o: bind
+                #     wordpress-volume:
