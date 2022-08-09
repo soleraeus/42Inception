@@ -1,14 +1,14 @@
 version: "3.6"
 
 services:
-        mariadb:
+        mymariadb:
+                container_name: mymariadb
                 build: requirements/mariadb
-                image: mariadb
                 restart: always
                 networks:
                         - db-network
-                volumes:
-                        - /home/bdetune/data:/var/lib/mysql
+#                volumes:
+#                        - /home/bdetune/data:/var/run/mysqld
 
 networks:
         db-network: {}

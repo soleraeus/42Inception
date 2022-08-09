@@ -1,5 +1,5 @@
 #! /bin/bash
 
-echo $(pwd);
-echo $(ls);
-#mysqld;
+sleep 2
+/etc/init.d/mysql start;
+mysql -uroot --password="" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'password'; FLUSH PRIVILEGES;"
