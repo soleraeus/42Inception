@@ -5,7 +5,8 @@ RUN apt-get update && \
      	chmod 0777 /var/run/mysqld; \
 	test -d /var/lib/mysql || mkdir /var/lib/mysql; \
      	chmod 0777 /var/lib/mysql
-EXPOSE 3306
+#EXPOSE 3306
+COPY ./conf/my.cnf /root/.my.cnf
 COPY conf.sh conf.sh
 COPY ./tools/init_db.sql /init_db.sql
 ENTRYPOINT ./conf.sh

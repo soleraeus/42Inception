@@ -1,7 +1,8 @@
 #! /bin/bash
 
-/etc/init.d/php-fpm start
-#mysql -uroot -p="password" -e "CREATE DATABASE wordpress;GRANT ALL ON wordpress.* to 'root' IDENTIFIED BY 'password'"
-cd /var/html/www && wp core is-installed --allow-root || wp core download --allow-root && wp config create --dbname=wordpress --dbuser=root --dbpass=password --dbhost=localhost --dbprefix=wp_ --allow-root && wp core install --allow-root
-/etc/init.d/php-fpm stop
-exec php-fpm -F
+until mysql -hmariadb -uwpuser -ppassword "wordpress"; do
+	sleep 2
+done
+echo "Connected to database"
+cd /var/html/www; wp core download --allow-root; wp config create --dbname=wordpress --dbuser=wpuser --dbpass=password --dbhost=mariadb --dbprefix=wp_ --allow-root; wp core install --url=bdetune.42.fr --title=Inception --admin_user=Inceptioner --admin_password=TheInceptionist --admin_email=unknown@gmail.com --skip-email --allow-root
+exec sleep infinity
