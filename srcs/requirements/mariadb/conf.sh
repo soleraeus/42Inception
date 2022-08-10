@@ -1,4 +1,7 @@
 #! /bin/bash
 
-#test /var/lib/mysql/wordpress || mysql -uroot --password="password" -e "CREATE USER 'maria_wordpress'@'localhost' IDENTIFIED BY 'password'; CREATE DATABASE wordpress; GRANT ALL ON wordpress.* to 'maria_wordpress' IDENTIFIED BY 'password'; FLUSH PRIVILEGES;"
+service mysql start
+sleep 2
+mysql -uroot --password="" < init_db.sql
+mysqladmin -uroot --password=password shutdown
 exec mysqld_safe
