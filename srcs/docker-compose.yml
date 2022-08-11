@@ -16,11 +16,24 @@ services:
                restart: always
                networks:
                        - db-network
+                       - serv-network
+               volumes:
+                       - wordpress-volume:/var/html/www
+        nginx:
+               container_name: nginx
+               build: requirements/nginx
+               depends_on: [mariadb, wordpress]
+               restart: always
+               ports:
+                       - "443:443"
+               networks:
+                       - serv-network
                volumes:
                        - wordpress-volume:/var/html/www
 
 networks:
         db-network: {}
+        serv-network: {}
 
 volumes:
         mariadb-volume:
