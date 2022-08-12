@@ -3,7 +3,9 @@ version: "3.6"
 services:
         mariadb:
                 container_name: mariadb
-                build: requirements/mariadb
+                build:
+                        context: ./requirements/mariadb
+                image: mariadb:inception
                 restart: always
                 networks:
                         - db-network
@@ -12,6 +14,7 @@ services:
         wordpress:
                container_name: wordpress
                build: requirements/wordpress
+               image: wordpress:inception
                depends_on: [mariadb]
                restart: always
                networks:
@@ -22,6 +25,7 @@ services:
         nginx:
                container_name: nginx
                build: requirements/nginx
+               image: nginx:inception
                depends_on: [mariadb, wordpress]
                restart: always
                ports:
