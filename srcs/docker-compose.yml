@@ -3,8 +3,7 @@ version: "3.6"
 services:
         mariadb:
                 container_name: mariadb
-                build:
-                        context: ./requirements/mariadb
+                build: requirements/mariadb
                 image: mariadb:inception
                 restart: always
                 networks:

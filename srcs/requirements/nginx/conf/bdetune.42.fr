@@ -4,14 +4,14 @@ server {
 
 	server_name bdetune.42.fr;
 
-	return 404
+	return 404;
 }
 
 server {
 	listen 443 ssl;
 	listen [::]:443 ssl;
 
-	ssl_certificate /etc/ssl/certs/cert/crt;
+	ssl_certificate /etc/ssl/certs/cert.crt;
 	ssl_certificate_key /etc/ssl/private/key.pem;
 
 	ssl_protocols TLSv1.2 TLSv1.3;
