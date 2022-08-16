@@ -8,5 +8,4 @@ RUN apt-get update && \
      	chmod 0777 /var/lib/mysql
 COPY ./conf/my.cnf /root/.my.cnf
 COPY ./conf/conf.sh conf.sh
-COPY ./tools/init_db.sql /init_db.sql
-ENTRYPOINT ./conf.sh
+ENTRYPOINT ["/conf.sh"]

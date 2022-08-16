@@ -11,9 +11,10 @@ fclean: clean
 	sudo docker rm -f mariadb wordpress nginx; \
 	sudo docker rmi -f mariadb:inception wordpress:inception nginx:inception; \
 	sudo docker volume rm srcs_wordpress-volume srcs_mariadb-volume; \
+	true;
 
 fclean-deep: fclean
-		sudo rm -rf /home/bdetune/data/wordpress/* /home/bdetune/data/mariadb/*
+		sudo rm -rf /home/bdetune/data/wordpress/* /home/bdetune/data/mariadb/*; true;
 
 re:	fclean all
 

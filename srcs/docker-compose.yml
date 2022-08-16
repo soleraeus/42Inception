@@ -6,8 +6,9 @@ services:
                 build: requirements/mariadb
                 image: mariadb:inception
                 restart: always
+                env_file: ./.env
                 networks:
-                        - db-network
+                        - inception-network
                 volumes:
                         - mariadb-volume:/var/lib/mysql
         wordpress:
@@ -16,9 +17,9 @@ services:
                image: wordpress:inception
                depends_on: [mariadb]
                restart: always
+               env_file: ./.env
                networks:
-                       - db-network
-                       - serv-network
+                       - inception-network
                volumes:
                        - wordpress-volume:/var/html/www
         nginx:
@@ -30,13 +31,12 @@ services:
                ports:
                        - "443:443"
                networks:
-                       - serv-network
+                       - inception-network
                volumes:
                        - wordpress-volume:/var/html/www
 
 networks:
-        db-network: {}
-        serv-network: {}
+        inception-network: {}
 
 volumes:
         mariadb-volume:
