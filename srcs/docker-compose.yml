@@ -49,7 +49,19 @@ services:
                        - inception-network
                volumes:
                        - wordpress-volume:/wordpress
-
+        redis:
+               container_name: redis
+               build: requirements/bonus/redis
+               image: redis:inception
+               depends_on: [mariadb, wordpress]
+               restart: always
+               sysctls:
+                       - net.core.somaxconn=512
+               env_file: ./.env
+               networks:
+                       - inception-network
+               volumes:
+                       - redis-volume:/var/lib/redis
 
 networks:
         inception-network: {}
@@ -64,5 +76,10 @@ volumes:
                 driver_opts:
                         type: none
                         device: /home/bdetune/data/wordpress
+                        o: bind
+        redis-volume:
+                driver_opts:
+                        type: none
+                        device: /home/bdetune/data/redis
                         o: bind
 

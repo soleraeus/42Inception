@@ -11,7 +11,17 @@ until mysql -hmariadb --user="${WP_DB_USER}" --password="${WP_DB_PWD}" "${WP_DB_
 	sleep 2
 done
 echo "Connected to database"
-cd /var/html/www; wp core download --allow-root 2> /dev/null; wp config create --dbname="${WP_DB_NAME}" --dbuser="${WP_DB_USER}" --dbpass="${WP_DB_PWD}" --dbhost=mariadb --dbprefix=wp_ --allow-root 2> /dev/null; wp core install --url="${WP_URL}" --title="${WP_TITLE}" --admin_user="${ADMIN_USER}" --admin_password=${ADMIN_PWD} --admin_email="${ADMIN_EMAIL}" --skip-email --allow-root; wp user create "${USER_LOGIN}" "${USER_EMAIL}" --user_pass="${USER_PWD}" --role=editor --allow-root
+cd /var/html/www; \
+wp core download --allow-root 2> /dev/null; \
+wp config create --dbname="${WP_DB_NAME}" --dbuser="${WP_DB_USER}" --dbpass="${WP_DB_PWD}" --dbhost=mariadb --dbprefix=wp_ --allow-root 2> /dev/null; \
+wp core install --url="${WP_URL}" --title="${WP_TITLE}" --admin_user="${ADMIN_USER}" --admin_password=${ADMIN_PWD} --admin_email="${ADMIN_EMAIL}" --skip-email --allow-root; \
+wp user create "${USER_LOGIN}" "${USER_EMAIL}" --user_pass="${USER_PWD}" --role=editor --allow-root; \
+echo "define( 'WP_REDIS_HOST', 'redis' );" >> wp-config.php; \
+echo "define( 'WP_REDIS_PORT', 6379 );" >> wp-config.php; \
+echo "define( 'WP_REDIS_TIMEOUT', 1 );" >> wp-config.php; \
+echo "define( 'WP_REDIS_READ_TIMEOUT', 1 );" >> wp-config.php; \
+echo "define( 'WP_REDIS_DATABASE', 0 );" >> wp-config.php;
+wp plugin install redis-cache --activate --allow-root; \
 fi
 
 chown -R www-data:www-data /var/html/www
