@@ -1,5 +1,6 @@
 #! /bin/bash
 
+############## Create configuration file on first start ##############
 if [ ! -f init_db.sql ]
 then
 cat <<EOF >init_db.sql
@@ -11,10 +12,16 @@ GRANT ALL PRIVILEGES ON ${WP_DB_NAME}.* TO '${WP_DB_USER}'@'%';
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PWD}';
 FLUSH PRIVILEGES;
 EOF
+fi
 
+####### Init database if wordpress db not on persistent volume #######
+if [ ! -f /var/lib/mysql/wordpress ]
+then
 service mysql start 2> /dev/null
 sleep 1
 mysql -uroot --password="" < init_db.sql 2> /dev/null || echo "Reusing already present database"
 mysqladmin -uroot --password="${MARIADB_ROOT_PWD}" shutdown 2> /dev/null
 fi
-exec mysqld_safe
+
+####################### Start MariaDB Service ########################
+exec mysqld

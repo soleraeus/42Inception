@@ -28,12 +28,28 @@ services:
                image: nginx:inception
                depends_on: [mariadb, wordpress]
                restart: always
+               env_file: ./.env
                ports:
                        - "443:443"
                networks:
                        - inception-network
                volumes:
                        - wordpress-volume:/var/html/www
+        proftpd:
+               container_name: proftpd
+               build: requirements/bonus/proftpd
+               image: proftpd:inception
+               depends_on: [wordpress]
+               restart: always
+               env_file: ./.env
+               ports:
+                       - "20:20"
+                       - "21:21"
+               networks:
+                       - inception-network
+               volumes:
+                       - wordpress-volume:/wordpress
+
 
 networks:
         inception-network: {}
