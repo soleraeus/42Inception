@@ -10,7 +10,7 @@ fclean: clean
 	cd srcs ; \
 	sudo docker rm -f mariadb wordpress nginx proftpd redis; \
 	sudo docker rmi -f mariadb:inception wordpress:inception nginx:inception proftpd:inception redis:inception; \
-	sudo docker volume rm srcs_wordpress-volume srcs_mariadb-volume; \
+	sudo docker volume rm srcs_wordpress-volume srcs_mariadb-volume srcs_redis-volume; \
 	true;
 
 fclean-deep: fclean

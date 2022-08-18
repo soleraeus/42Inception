@@ -10,13 +10,13 @@ RUN apt-get update && \
 	wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
 	sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list' && \
 	apt-get update && \
-	apt-get install -y php7.4 \
-	php7.4-fpm \
+	apt-get install -y php7.4-fpm \
 	php7.4-cli \
 	php7.4-bcmath \
 	php7.4-common \
 	php7.4-curl \
 	php7.4-gd \
+	php7.4-imagick \
 	php7.4-intl \
 	php7.4-json \
 	php7.4-mbstring \
@@ -26,7 +26,8 @@ RUN apt-get update && \
 	php7.4-xml \
 	php7.4-xmlrpc \
 	php7.4-xsl \
-	php7.4-zip && \
+	php7.4-zip \
+	php7.4-redis && \
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar && \
 	mv wp-cli.phar /usr/local/bin/wp &&\

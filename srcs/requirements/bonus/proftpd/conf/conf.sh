@@ -1,6 +1,6 @@
 #! /bin/bash
 
-until test -f /wordpress/index.php; do
+until test -f /wordpress/wordpress/index.php; do
 	sleep 1
 done
 useradd ${FTP_USER} --base-dir /wordpress

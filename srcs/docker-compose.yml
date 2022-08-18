@@ -32,7 +32,9 @@ services:
                ports:
                        - "443:443"
                networks:
-                       - inception-network
+                       inception-network:
+                               aliases:
+                                       - bdetune.42.fr
                volumes:
                        - wordpress-volume:/var/html/www
         proftpd:

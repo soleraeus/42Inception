@@ -7,5 +7,4 @@ RUN apt-get update && \
 	echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY conf/conf.sh /conf.sh
 RUN rm -rf /etc/nginx/sites-enabled/default 
-#&& ln -s /etc/nginx/sites-available/bdetune.42.fr /etc/nginx/sites-enabled/bdetune.42.fr
 ENTRYPOINT ["/conf.sh"]

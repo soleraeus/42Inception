@@ -23,7 +23,7 @@ server {
 
 	server_name ${WP_URL};
 
-	root /var/html/www;
+	root /var/html/www/wordpress;
 	index index.php index.hmtl index.htm;
 
 	location / {
