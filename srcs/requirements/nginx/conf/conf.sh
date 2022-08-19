@@ -2,6 +2,7 @@
 
 if [ ! -f "/etc/nginx/sites-available/${WP_URL}" ]
 then
+openssl req -x509 -newkey rsa:4096 -nodes -keyout /etc/ssl/private/key.pem -out /etc/ssl/certs/cert.crt -sha256 -days 365 -subj "/C=FR/L=Paris/O=Inception/CN=${WP_URL}"
 cat << EOF > "/etc/nginx/sites-available/${WP_URL}"
 server {
 	listen 80;
@@ -24,7 +25,7 @@ server {
 	server_name ${WP_URL};
 
 	root /var/html/www/wordpress;
-	index index.php index.hmtl index.htm;
+	index index.php index.html index.htm;
 
 	location / {
  	   try_files \$uri \$uri/ /index.php?q=\$uri&\$args;
@@ -49,5 +50,36 @@ server {
 EOF
 
 ln -s "/etc/nginx/sites-available/${WP_URL}" "/etc/nginx/sites-enabled/${WP_URL}"
+
+openssl req -x509 -newkey rsa:4096 -nodes -keyout /etc/ssl/private/key-bs.pem -out /etc/ssl/certs/cert-bs.crt -sha256 -days 365 -subj "/C=FR/L=Paris/O=Inception/CN=bullshit.42.fr"
+cat << EOF > "/etc/nginx/sites-available/bullshit.42.fr"
+server {
+	listen 80;
+	listen [::]:80;
+
+	server_name bullshit.42.fr;
+
+	return 404;
+}
+
+server {
+	listen 443 ssl;
+	listen [::]:443 ssl;
+
+	ssl_certificate /etc/ssl/certs/cert-bs.crt;
+	ssl_certificate_key /etc/ssl/private/key-bs.pem;
+
+	ssl_protocols TLSv1.2 TLSv1.3;
+
+	server_name bullshit.42.fr;
+
+	root /var/html/www/stat;
+	index index.php index.html index.htm;
+}
+EOF
+
+ln -s "/etc/nginx/sites-available/bullshit.42.fr" "/etc/nginx/sites-enabled/bullshit.42.fr"
+
+
 fi
 exec nginx

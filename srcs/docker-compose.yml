@@ -8,7 +8,7 @@ services:
                 restart: always
                 env_file: ./.env
                 networks:
-                        - inception-network
+                        - gen-network
                 volumes:
                         - mariadb-volume:/var/lib/mysql
         wordpress:
@@ -19,7 +19,7 @@ services:
                restart: always
                env_file: ./.env
                networks:
-                       - inception-network
+                       - gen-network
                volumes:
                        - wordpress-volume:/var/html/www
         nginx:
@@ -32,7 +32,7 @@ services:
                ports:
                        - "443:443"
                networks:
-                       inception-network:
+                       gen-network:
                                aliases:
                                        - bdetune.42.fr
                volumes:
@@ -48,25 +48,25 @@ services:
                        - "20:20"
                        - "21:21"
                networks:
-                       - inception-network
+                       - gen-network
                volumes:
                        - wordpress-volume:/wordpress
         redis:
                container_name: redis
                build: requirements/bonus/redis
                image: redis:inception
-               depends_on: [mariadb, wordpress]
+               depends_on: [mariadb]
                restart: always
                sysctls:
                        - net.core.somaxconn=512
                env_file: ./.env
                networks:
-                       - inception-network
+                       - gen-network
                volumes:
                        - redis-volume:/var/lib/redis
 
 networks:
-        inception-network: {}
+        gen-network: {}
 
 volumes:
         mariadb-volume:
