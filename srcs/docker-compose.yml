@@ -22,11 +22,22 @@ services:
                        - gen-network
                volumes:
                        - wordpress-volume:/var/html/www
+        adminer:
+               container_name: adminer
+               build: requirements/bonus/adminer
+               image: adminer:inception
+               depends_on: [mariadb]
+               restart: always
+               env_file: ./.env
+               networks:
+                       - gen-network
+               volumes:
+                       - wordpress-volume:/var/html/www
         nginx:
                container_name: nginx
                build: requirements/nginx
                image: nginx:inception
-               depends_on: [mariadb, wordpress]
+               depends_on: [mariadb, wordpress, adminer]
                restart: always
                env_file: ./.env
                ports:
@@ -41,11 +52,10 @@ services:
                container_name: proftpd
                build: requirements/bonus/proftpd
                image: proftpd:inception
-               depends_on: [wordpress]
+               depends_on: [wordpress, adminer]
                restart: always
                env_file: ./.env
                ports:
-                       - "20:20"
                        - "21:21"
                networks:
                        - gen-network
@@ -55,7 +65,6 @@ services:
                container_name: redis
                build: requirements/bonus/redis
                image: redis:inception
-               depends_on: [mariadb]
                restart: always
                sysctls:
                        - net.core.somaxconn=512
@@ -84,4 +93,3 @@ volumes:
                         type: none
                         device: /home/bdetune/data/redis
                         o: bind
-
