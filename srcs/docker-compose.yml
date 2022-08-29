@@ -73,6 +73,22 @@ services:
                        - gen-network
                volumes:
                        - redis-volume:/var/lib/redis
+        cadvisor:
+               container_name: cadvisor
+               build: requirements/bonus/cadvisor
+               image: cadvisor:inception
+               depends_on: [wordpress, adminer, proftpd, nginx, mariadb, redis]
+               restart: always
+               env_file: ./.env
+               ports:
+                       - "8080:8080"
+               networks:
+                       - gen-network
+               volumes:
+                       - /:/rootfs:ro
+                       - /var/run:/var/run:rw
+                       - /sys:/sys:ro
+                       - /var/lib/docker/:/var/lib/docker:ro
 
 networks:
         gen-network: {}
