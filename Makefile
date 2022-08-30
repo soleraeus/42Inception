@@ -11,8 +11,8 @@ clean:
 
 fclean: clean
 	cd srcs ; \
-	sudo docker rm -f mariadb wordpress nginx proftpd redis adminer cadvisor; \
-	sudo docker rmi -f mariadb:inception wordpress:inception nginx:inception proftpd:inception redis:inception adminer:inception cadvisor:inception; \
+	sudo docker rm -f mariadb wordpress nginx proftpd redis adminer cadvisor flask; \
+	sudo docker rmi -f mariadb:inception wordpress:inception nginx:inception proftpd:inception redis:inception adminer:inception cadvisor:inception flask:inception; \
 	sudo docker volume rm inception_wordpress-volume inception_mariadb-volume inception_redis-volume; \
 	true;
 
