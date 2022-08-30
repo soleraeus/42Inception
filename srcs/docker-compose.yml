@@ -80,6 +80,7 @@ services:
                depends_on: [wordpress, adminer, proftpd, nginx, mariadb, redis]
                restart: always
                env_file: ./.env
+               privileged: true
                ports:
                        - "8080:8080"
                networks:
