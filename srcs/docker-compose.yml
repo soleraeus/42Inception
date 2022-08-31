@@ -22,22 +22,11 @@ services:
                        - gen-network
                volumes:
                        - wordpress-volume:/var/html/www
-        adminer:
-               container_name: adminer
-               build: requirements/bonus/adminer
-               image: adminer:inception
-               depends_on: [mariadb]
-               restart: always
-               env_file: ./.env
-               networks:
-                       - gen-network
-               volumes:
-                       - wordpress-volume:/var/html/www
         nginx:
                container_name: nginx
                build: requirements/nginx
                image: nginx:inception
-               depends_on: [mariadb, wordpress, adminer]
+               depends_on: [mariadb, wordpress]
                restart: always
                env_file: ./.env
                ports:
@@ -48,64 +37,6 @@ services:
                                        - bdetune.42.fr
                volumes:
                        - wordpress-volume:/var/html/www
-        proftpd:
-               container_name: proftpd
-               build: requirements/bonus/proftpd
-               image: proftpd:inception
-               depends_on: [wordpress, adminer]
-               restart: always
-               env_file: ./.env
-               ports:
-                       - "21:21"
-               networks:
-                       - gen-network
-               volumes:
-                       - wordpress-volume:/wordpress
-        redis:
-               container_name: redis
-               build: requirements/bonus/redis
-               image: redis:inception
-               restart: always
-               sysctls:
-                       - net.core.somaxconn=512
-               env_file: ./.env
-               networks:
-                       - gen-network
-               volumes:
-                       - redis-volume:/var/lib/redis
-        cadvisor:
-               container_name: cadvisor
-               build: requirements/bonus/cadvisor
-               image: cadvisor:inception
-               depends_on: [wordpress, adminer, proftpd, nginx, mariadb, redis]
-               restart: always
-               env_file: ./.env
-               privileged: true
-               ports:
-                       - "8080:8080"
-               networks:
-                       - gen-network
-               volumes:
-                       - /:/rootfs:ro
-                       - /var/run:/var/run:rw
-                       - /sys:/sys:ro
-                       - /var/lib/docker/:/var/lib/docker:ro
-                       - /dev/disk:/dev/disk:ro
-               devices:
-                       - /dev/kmsg:/dev/kmsg
-        flask:
-               container_name: flask
-               build: requirements/bonus/flask
-               image: flask:inception
-               restart: always
-               env_file: ./.env
-               ports:
-                       - "5000:5000"
-               networks:
-                       - gen-network
-               volumes:
-                       - wordpress-volume:/var/html/www
-
 networks:
         gen-network: {}
 
@@ -119,9 +50,4 @@ volumes:
                 driver_opts:
                         type: none
                         device: /home/bdetune/data/wordpress
-                        o: bind
-        redis-volume:
-                driver_opts:
-                        type: none
-                        device: /home/bdetune/data/redis
                         o: bind
