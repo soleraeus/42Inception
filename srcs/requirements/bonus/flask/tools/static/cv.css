@@ -1,8 +1,9 @@
 html, body
 {
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
-    margin: 0;
+    margin: 0 0;
+    padding: 0 0;
 }
 
 #main
@@ -22,4 +23,77 @@ html, body
 {
     display: grid;
     grid-template-columns: 3fr 7fr;
+}
+
+#left
+{
+    padding: 0 5%;
+}
+
+.logos
+{
+    margin: 0 10%;
+}
+
+.logo
+{
+    margin: 0 2%;
+    width: 32px;
+    height: 32px;
+}
+
+#right
+{
+    padding: 0% 5%;
+}
+
+.date-blocks
+{
+    text-align: left;
+    margin-bottom: 16px;
+}
+
+.date-block
+{
+    margin-bottom: 16px;
+}
+
+.date-block p
+{
+    margin: 0 0;
+}
+
+.date-block-title
+{
+    display: flex;
+    flex-direction: row;
+    margin: 0 0;
+    justify-content: space-between;
+}
+
+.date-block-title h3 a
+{
+    text-decoration: none;
+    color: black;
+    font-size: 1.2rem;
+}
+
+.time-period
+{
+    margin-left: auto;
+    font-size: 1.2rem;
+    font-style: italic;
+    justify-self: flex-end;
+}
+
+.date-block-title h3
+{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 0;
+}
+.location
+{
+    font-size: 1rem;
+    font-style: italic;
 }

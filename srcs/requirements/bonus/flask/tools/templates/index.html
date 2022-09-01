@@ -14,16 +14,125 @@
         <section id="content">
             <article id="left">
                 <article>
+                    <h2>Get in touch:</h2>
+                    <div class="logos">
+                        <a href="mailto:bdetune@student.42.fr"><p><img src="{{ url_for('static', filename='email.png') }}" alt="Logo email" class="logo">bdetune@student.42.fr</p></a>
+                    </div>
+                    </article>
+                <article>
                 <h2>Find me on:</h2>
-                <div>
-                    <a href=""><img src="{{ url_for('static', filename='linkedin.png') }}" alt="Logo Linkedin" class="logo"></a>
-                    <img src="{{ url_for('static', filename='github.png') }}" alt="Logo Github" class="logo">
-                    <img src="{{ url_for('static', filename='codingame.png') }}" alt="Logo Codingame" class="logo">
+                <div class="logos">
+                    <a href="https://fr.linkedin.com/in/bricedetune"><img src="{{ url_for('static', filename='linkedin.png') }}" alt="Logo Linkedin" class="logo"></a>
+                    <a href="https://github.com/soleraeus"><img src="{{ url_for('static', filename='github.png') }}" alt="Logo Github" class="logo"></a>
+                    <a href="https://www.codingame.com/profile/968c0bb8c29fcb822b89a0e6005dd00f5389611"><img src="{{ url_for('static', filename='codingame.png') }}" alt="Logo Codingame" class="logo"></a>
                 </div>
                 </article>
+                <article>
+                    <h2>My languages:</h2>
+                    <div class="logos">
+                        <img src="{{ url_for('static', filename='c-logo.png') }}" alt="Logo C language" class="logo">
+                        <img src="{{ url_for('static', filename='c++-logo.png') }}" alt="Logo C++ language" class="logo">
+                        <img src="{{ url_for('static', filename='js.png') }}" alt="Logo JS language" class="logo">
+                        <img src="{{ url_for('static', filename='python-logo.jpeg') }}" alt="Logo Python language" class="logo">
+                        <img src="{{ url_for('static', filename='html-logo.png') }}" alt="Logo HTML language" class="logo" title="I know that's not really a language">
+                        <img src="{{ url_for('static', filename='css-logo.png') }}" alt="Logo CSS language" class="logo" title="I know, that's not really a language either">
+                    </div>
+                    </article>
             </article>
             <article id="right">
                 <h2>Professional Experience</h2>
+                <section class="date-blocks">
+                    <article class="date-block">
+                        <section class="date-block-title">
+                            <h3>Maybe your company?</h3>
+                            <p class="time-period">From late 2022 and to infinity!</p>
+                        </section>
+                        <p class="location">Wherever, I'm flexible</p>
+                        <p class="tasks">Coding coding coding! Ideally some kernel hardening</p>
+                    </article>
+                    <article class="date-block">
+                        <section class="date-block-title">
+                            <h3><a href="agencelopez.com">Agence Veronique Lopez</a></h3>
+                            <p class="time-period">From Feb. 2018 to Aug. 2022</p>
+                        </section>
+                        <p class="location">Paris, France</p>
+                        <p class="tasks">Publicist for international art galleries, artists and designers!<br>I handled various budgets (including the Paris Flea Market, Arielle Dombasle, Herve Van der Straeten...) and managed a small team. My missions? It is a small agency so pretty much everything.</p>
+                    </article>
+                    <article class="date-block">
+                        <section class="date-block-title">
+                            <h3>Freelance</h3>
+                            <p class="time-period">From Sep. 2017 to Sep. 2018</p>
+                        </section>
+                        <p class="location">Paris, France</p>
+                        <p class="tasks">Freelance Asian art broker</p>
+                    </article>
+                    <article class="date-block">
+                        <section class="date-block-title">
+                            <h3>Chrometeor Photography</h3>
+                            <p class="time-period">Since May 2017</p>
+                        </section>
+                        <p class="location">Around the world</p>
+                        <p class="tasks">Photographer</p>
+                    </article>
+                    <article class="date-block">
+                        <section class="date-block-title">
+                            <h3><a href="http://www.trfineart.com/">Tyler Rollins Fine Art</a></h3>
+                            <p class="time-period">From Sep. 2016 to Feb. 2017</p>
+                        </section>
+                        <p class="location">New York, USA</p>
+                        <p class="tasks">Gallery Assistant for a world-renowned Southeast Asian contemporary art gallery<br>Taking care of artists, first point of contact for clients in the gallery, setting up exhibitions, updating the website...</p>
+                    </article>
+                    <article class="date-block">
+                        <section class="date-block-title">
+                            <h3>Various around the world, if you wanna know more check my <a href="https://fr.linkedin.com/in/bricedetune">LinkedIn</a></h3>
+                        </section>
+                    </article>
+                </section>
+                <hr>
+                <h2>Academia</h2>
+                <section class="date-blocks">
+                    <article class="date-block">
+                        <section class="date-block-title">
+                            <h3><a href="https://42.fr/">42 School</a></h3>
+                            <p class="time-period">Since Nov. 2021</p>
+                        </section>
+                        <p class="location">Paris, France</p>
+                        <p class="tasks">Coding coding coding!</p>
+                    </article>
+                    <article class="date-block">
+                        <section class="date-block-title">
+                            <h3><a href="https://www.sothebysinstitute.com/new-york">Sotheby's Institute of Arts</a></h3>
+                            <p class="time-period">From Sep. 2015 to Jan. 2017</p>
+                        </section>
+                        <p class="location">New York, USA</p>
+                        <p class="tasks">MA Art Business - summa cum laude with honors</p>
+                    </article>
+                    <article class="date-block">
+                        <section class="date-block-title">
+                            <h3><a href="https://www.ucl.ac.uk/">University College London (UCL)</a></h3>
+                            <p class="time-period">From Sep. 2013 to Oct. 2014</p>
+                        </section>
+                        <p class="location">London, UK</p>
+                        <p class="tasks">MA Archaeology and Heritage of Asia - magna cum laude</p>
+                    </article>
+                    <article class="date-block">
+                        <section class="date-block-title">
+                            <h3><a href="https://www.parisnanterre.fr/">Nanterre University</a></h3>
+                            <p class="time-period">From Sep. 2010 to Sep. 2013</p>
+                        </section>
+                        <p class="location">Paris, France</p>
+                        <p class="tasks">BA Archaeology - magna cum laude<br>
+                        BA Social Anthropology - cum laude</p>
+                    </article>
+                    <article class="date-block">
+                        <section class="date-block-title">
+                            <h3><a href="https://www.polymtl.ca/">Montreal Polytechnique School</a></h3>
+                            <p class="time-period">From Aug. 2008 to Jun. 2010</p>
+                        </section>
+                        <p class="location">Montreal, Canada</p>
+                        <p class="tasks">BSc Physics - Left after the 2nd year</p>
+                    </article>
+                </section>
             </article>
         </section>
     </section>
