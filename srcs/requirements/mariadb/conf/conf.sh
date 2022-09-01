@@ -17,7 +17,9 @@ EOF
 ######### Create db if it does not exist, update it otherwise ########
 service mysql start 2> /dev/null
 sleep 1
-mysql -uroot --password="" < init_db.sql 2> /dev/null || mysql -uroot --password="${MARIADB_ROOT_PWD}" < init_db.sql 2> /dev/null || (echo "Error creating database"; exit 1)
+mysql -uroot --password="" < init_db.sql 2> /dev/null \
+|| mysql -uroot --password="${MARIADB_ROOT_PWD}" < init_db.sql 2> /dev/null \
+|| (echo "Error creating database"; exit 1)
 mysqladmin -uroot --password="${MARIADB_ROOT_PWD}" shutdown 2> /dev/null
 fi
 

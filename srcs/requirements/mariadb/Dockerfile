@@ -9,5 +9,8 @@ RUN printf '#! /bin/sh\nexit 0' > /usr/sbin/policy-rc.d; \
 	test -d /var/lib/mysql || mkdir /var/lib/mysql; \
      	chmod 0777 /var/lib/mysql
 COPY ./conf/my.cnf /root/.my.cnf
-COPY ./conf/conf.sh conf.sh
+COPY ./conf/conf.sh /conf.sh
+RUN chown root:root /root/.my.cnf; \
+	chmod 0777 /root/.my.cnf; \
+	chmod 0777 /conf.sh;
 ENTRYPOINT ["/conf.sh"]
