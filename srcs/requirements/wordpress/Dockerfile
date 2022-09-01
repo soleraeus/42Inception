@@ -33,7 +33,9 @@ RUN printf '#! /bin/sh\nexit 0' > /usr/sbin/policy-rc.d; \
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar && \
 	mv wp-cli.phar /usr/local/bin/wp &&\
-	sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/' /etc/php/7.4/fpm/pool.d/www.conf
-COPY conf/conf.sh /conf.sh
+	sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/' /etc/php/7.4/fpm/pool.d/www.conf; \
+	test -d /run/php || mkdir -p /run/php && \
+	test -f /run/php/php7.4-fpm.pid || touch /run/php/php7.4-fpm.pid
+COPY ./conf/conf.sh /conf.sh
 RUN chmod 0777 /conf.sh
 ENTRYPOINT ["/conf.sh"]

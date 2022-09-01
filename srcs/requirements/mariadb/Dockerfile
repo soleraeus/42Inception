@@ -11,6 +11,6 @@ RUN printf '#! /bin/sh\nexit 0' > /usr/sbin/policy-rc.d; \
 COPY ./conf/my.cnf /root/.my.cnf
 COPY ./conf/conf.sh /conf.sh
 RUN chown root:root /root/.my.cnf; \
-	chmod 0777 /root/.my.cnf; \
+	chmod 0644 /root/.my.cnf; \
 	chmod 0777 /conf.sh;
 ENTRYPOINT ["/conf.sh"]

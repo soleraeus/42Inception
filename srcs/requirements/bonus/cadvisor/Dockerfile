@@ -1,7 +1,9 @@
 FROM debian:buster
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && \
-	apt-get install -y software-properties-common \
+RUN printf '#! /bin/sh\nexit 0' > /usr/sbin/policy-rc.d; \
+	echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections; \
+	apt-get update && \
+	apt-get install --no-install-recommends --no-install-suggests -y software-properties-common \
 	wget \
 	tar \
 	git \
@@ -17,7 +19,7 @@ ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
 RUN cd /usr/local/go/src; \
 	git clone https://github.com/google/cadvisor.git cadvisor; \
 	cd cadvisor; \
-	make build; \
+	make -j build; \
 	cp _output/cadvisor /usr/local/bin; \
-	chmod 777 /usr/local/bin/cadvisor;
+	chmod 0777 /usr/local/bin/cadvisor;
 CMD ["cadvisor"]

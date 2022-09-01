@@ -1,10 +1,5 @@
 #! /bin/bash
 
-########### Ensure files necessary to php-fpm are present ############
-test -d /run/php || mkdir -p /run/php
-test -f /run/php || touch /run/php/php7.4-fpm.pid
-
-
 ########################## Wait for database #########################
 until mysql -hmariadb --user="${WP_DB_USER}" --password="${WP_DB_PWD}" "${WP_DB_NAME}" 2> /dev/null; do
 	sleep 2
