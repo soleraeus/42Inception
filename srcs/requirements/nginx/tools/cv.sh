@@ -25,6 +25,8 @@ server {
 
 	server_name ${FLASK_URL};
 
+	root /var/html/www/cv/;
+
 	location / {
            include proxy_params;
            proxy_pass http://flask:5000;

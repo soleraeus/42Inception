@@ -1,0 +1,25 @@
+html, body
+{
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#main
+{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#title
+{
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+#content
+{
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+}

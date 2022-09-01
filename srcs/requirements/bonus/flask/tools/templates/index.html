@@ -6,14 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inception - CV</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='cv.css') }}">
 </head>
 <body>
     <section id="main">
-        <article id="title"><h1>Inception<br>bdetune</h1></article>
-        <article id="left">
-            <h2>Skills</h2>
-        </article>
-        <article id="right"><h2>Professional Experience</h2></article>
+        <section id="title"><h1>Inception<br>bdetune</h1></section>
+        <section id="content">
+            <article id="left">
+                <article>
+                <h2>Find me on:</h2>
+                <div>
+                    <a href=""><img src="{{ url_for('static', filename='linkedin.png') }}" alt="Logo Linkedin" class="logo"></a>
+                    <img src="{{ url_for('static', filename='github.png') }}" alt="Logo Github" class="logo">
+                    <img src="{{ url_for('static', filename='codingame.png') }}" alt="Logo Codingame" class="logo">
+                </div>
+                </article>
+            </article>
+            <article id="right">
+                <h2>Professional Experience</h2>
+            </article>
+        </section>
     </section>
 </body>
 </html>
