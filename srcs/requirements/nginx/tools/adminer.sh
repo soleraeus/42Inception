@@ -1,9 +1,14 @@
 #! /bin/bash
 
 # Generate certificate
+if [ ! -f /etc/ssl/certs/cert-adminer.crt ]
+then
 openssl req -x509 -newkey rsa:4096 -nodes -keyout /etc/ssl/private/key-adminer.pem -out /etc/ssl/certs/cert-adminer.crt -sha256 -days 365 -subj "/C=FR/L=Paris/O=${COMPOSE_PROJECT_NAME}/CN=${ADMINER_URL}"
+fi
 
 # Generate config
+if [ ! -f /etc/nginx/sites-available/${ADMINER_URL} ]
+then
 cat << EOF > "/etc/nginx/sites-available/${ADMINER_URL}"
 server {
 	listen 80;
@@ -48,5 +53,6 @@ EOF
 
 # enable website
 ln -s "/etc/nginx/sites-available/${ADMINER_URL}" "/etc/nginx/sites-enabled/${ADMINER_URL}"
+fi
 
 exit 0

@@ -1,9 +1,14 @@
 #! /bin/bash
 
 # Generate certificate
+if [ ! -f /etc/ssl/certs/cert-cv.crt ]
+then
 openssl req -x509 -newkey rsa:4096 -nodes -keyout /etc/ssl/private/key-cv.pem -out /etc/ssl/certs/cert-cv.crt -sha256 -days 365 -subj "/C=FR/L=Paris/O=${COMPOSE_PROJECT_NAME}/CN=${FLASK_URL}"
+fi
 
 # Generate config
+if [ ! -f /etc/nginx/sites-available/${FLASK_URL} ]
+then
 cat << EOF > "/etc/nginx/sites-available/${FLASK_URL}"
 server {
 	listen 80;
@@ -37,5 +42,6 @@ EOF
 
 # enable website
 ln -s "/etc/nginx/sites-available/${FLASK_URL}" "/etc/nginx/sites-enabled/${FLASK_URL}"
+fi
 
 exit 0

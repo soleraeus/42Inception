@@ -1,9 +1,14 @@
 #! /bin/bash
 
 # Generate certificate
+if [ ! -f /etc/ssl/certs/cert-wp.crt ]
+then
 openssl req -x509 -newkey rsa:4096 -nodes -keyout /etc/ssl/private/key-wp.pem -out /etc/ssl/certs/cert-wp.crt -sha256 -days 365 -subj "/C=FR/L=Paris/O=${COMPOSE_PROJECT_NAME}/CN=${WP_URL}"
+fi
 
 # Generate config
+if [ ! -f /etc/nginx/sites-available/${WP_URL} ]
+then
 cat << EOF > "/etc/nginx/sites-available/${WP_URL}"
 server {
 	listen 80;
@@ -52,5 +57,6 @@ EOF
 
 # enable website
 ln -s "/etc/nginx/sites-available/${WP_URL}" "/etc/nginx/sites-enabled/${WP_URL}"
+fi
 
 exit 0

@@ -21,7 +21,7 @@ services:
                networks:
                        - gen-network
                volumes:
-                       - wordpress-volume:/var/html/www
+                       - www-volume:/var/html/www
         nginx:
                container_name: nginx
                build: requirements/nginx
@@ -36,7 +36,7 @@ services:
                                aliases:
                                        - bdetune.42.fr
                volumes:
-                       - wordpress-volume:/var/html/www
+                       - www-volume:/var/html/www
 networks:
         gen-network: {}
 
@@ -46,8 +46,8 @@ volumes:
                         type: none
                         device: /home/bdetune/data/mariadb
                         o: bind
-        wordpress-volume:
+        www-volume:
                 driver_opts:
                         type: none
-                        device: /home/bdetune/data/wordpress
+                        device: /home/bdetune/data/www
                         o: bind
