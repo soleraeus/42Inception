@@ -26,6 +26,9 @@ then
 	cd /var/html/www/wordpress; \
 	wp plugin install redis-cache --activate --allow-root 2> /dev/null; \
 	wp redis enable --allow-root;
+else
+	cd /var/html/www/wordpress; \
+	wp plugin deactivate redis-cache --uninstall --allow-root 2> /dev/null;
 fi
 
 chown -R www-data:www-data /var/html/www/wordpress
